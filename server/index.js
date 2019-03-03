@@ -17,13 +17,24 @@ var con = mysql.createConnection({
 app.post('/contact', function (req, res) {
     console.log(req.body);
     con.connect(function (err) {
-        var sql = "INSERT INTO `contact` (`name`, `email`, `phone`) VALUES ?";
+        let sql ="INSERT INTO contact SET?"
         con.query(sql, req.body, function (err, result) {
         if (err) throw err;
     res.send('sent');
 });
     })
 })
+
+app.get('/contact', function (req, res) {
+    con.connect(function (err) {
+        if (err) throw err;
+        con.query("SELECT * FROM contact", function (err, result, fields) {
+            if (err) throw err;
+            console.log(result);
+            res.send(result);
+        });
+    });
+});
 
 app.listen(PORT, function () {
     console.log('server started at port ' + PORT)
