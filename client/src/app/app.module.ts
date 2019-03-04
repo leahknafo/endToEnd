@@ -9,6 +9,10 @@ import { AboutComponent } from './about/about.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ContactService } from './services/contact.service';
+import { RecipeComponent } from './recipe/recipe.component';
+import { AddComponent } from './add/add.component';
+import { ListComponent } from './list/list.component';
+
 
 
 @NgModule({
@@ -16,7 +20,10 @@ import { ContactService } from './services/contact.service';
     AppComponent,
     PageComponent,
     HomeComponent,
-    AboutComponent
+    AboutComponent,
+    RecipeComponent,
+    AddComponent,
+    ListComponent
   ],
   imports: [
     BrowserModule,
