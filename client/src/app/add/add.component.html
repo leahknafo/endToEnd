@@ -1,11 +1,11 @@
 <form>
   <div class="form-group col-3">
     <label for="exampleInputPassword1">Name</label>
-    <input type="text" class="form-control" placeholder="Enter Name" [(ngModel)]='recipeModel.name' [ngModelOptions]="{standalone: true}">
+    <input type="text" class="form-control" placeholder="Enter Name" [(ngModel)]='recipeModel.name' name="name">
   </div>
   <div class="form-group col-3">
     <label for="exampleInputPassword1">INSTRUCTION</label>
-    <input type="text" class="form-control"  placeholder="Enter Instruction" [(ngModel)]='recipeModel.instruction' [ngModelOptions]="{standalone: true}">
+    <input type="text" class="form-control"  placeholder="Enter Instruction" [(ngModel)]='recipeModel.instruction' name="instruction">
   </div>
   <input type="button" value="Add" (click)="addRecipe()">
 </form>
