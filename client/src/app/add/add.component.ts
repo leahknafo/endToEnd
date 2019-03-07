@@ -9,19 +9,19 @@ import { RecipeService } from '../services/recipe.service';
   styleUrls: ['./add.component.css']
 })
 export class AddComponent implements OnInit {
+  recipeModel: Recipe;
   ngOnInit() {
 
   }
 
-  constructor(private recipeService: RecipeService) { }
-  addRecipe(name, instruction) {
-    const d = <Recipe>{
-      name: name.value,
-      instruction: instruction.value
-    }
+  constructor(private recipeService: RecipeService) { 
+    this.recipeModel=<Recipe>{};
+  }
+  addRecipe() {
 
-    return this.recipeService.post(d).subscribe(res => {
+    const subs=this.recipeService.post(this.recipeModel).subscribe(res => {
       console.log(res);
+      subs.unsubscribe();
     });
 
   }
