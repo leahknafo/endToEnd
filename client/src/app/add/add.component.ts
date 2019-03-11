@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Recipe } from '../models/recipe';
 import { RecipeService } from '../services/recipe.service';
+import { SocketService } from '../services/socket.service';
 
 
 @Component({
@@ -14,14 +15,13 @@ export class AddComponent implements OnInit {
 
   }
 
-  constructor(private recipeService: RecipeService) { 
+  constructor(private socketService: SocketService) { 
     this.recipeModel=<Recipe>{};
   }
   addRecipe() {
 
-    const subs=this.recipeService.post(this.recipeModel).subscribe(res => {
+    this.socketService.post(this.recipeModel).subscribe(res => {
       console.log(res);
-      subs.unsubscribe();
     });
 
   }

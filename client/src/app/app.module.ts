@@ -12,7 +12,8 @@ import { ContactService } from './services/contact.service';
 import { RecipeComponent } from './recipe/recipe.component';
 import { AddComponent } from './add/add.component';
 import { ListComponent } from './list/list.component';
-
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+const config: SocketIoConfig= { url: 'http://localhost:8888', options: {} };
 
 
 
@@ -30,8 +31,8 @@ import { ListComponent } from './list/list.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
-
+    HttpClientModule,
+    SocketIoModule.forRoot(config)
   ],
   providers: [ContactService],
   bootstrap: [AppComponent]

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Recipe} from '../models/recipe';
-import { RecipeService } from '../services/recipe.service';
+import { SocketService } from '../services/socket.service';
 
 @Component({
   selector: 'app-list',
@@ -10,10 +10,10 @@ import { RecipeService } from '../services/recipe.service';
 export class ListComponent implements OnInit {
   recipe: Recipe[];
 
-  constructor(private recipeService: RecipeService) { }
+  constructor(private socketService: SocketService) { }
   
   ngOnInit() {
-     this.recipeService.get().subscribe(RecipeData => {
+     this.socketService.get().subscribe(RecipeData => {
       this.recipe = <Recipe[]>RecipeData
   });
 

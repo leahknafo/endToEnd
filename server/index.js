@@ -2,10 +2,16 @@
 const express = require('express');
 const cors = require('cors');
 const PORT = 8888;
+
 const app = express();
 var mysql = require('mysql');
 app.use(cors());
 app.use(express.json());
+
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
+
+
 
 var con = mysql.createConnection({
     host: "localhost",
@@ -14,7 +20,7 @@ var con = mysql.createConnection({
     database: "endToEnd"
 });
 
-con.connect(function(e, d) {
+con.connect(function (e, d) {
     if (e) console.log(e)
     console.log('con success');
 })
@@ -61,6 +67,21 @@ app.get('/recipe', function (req, res) {
     });
 });
 
-app.listen(PORT, function () {
+io.on('connection', function (socket) {
+    console.log('a user connected');
+    const recipeArray=[];
+
+    socket.on('message', function (msg) {
+        console.log('message: ' + msg);
+        recipeArray.push(msg)
+        socket.emit('message', recipeArray, {for:"everyone"});
+    });
+
+    socket.on('disconnect', function () {
+        console.log('user disconnected');
+    });
+});
+
+http.listen(PORT, function () {
     console.log('server started at port ' + PORT)
 });
