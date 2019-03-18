@@ -38,14 +38,27 @@ app.post('/contact', function (req, res) {
 
 app.post('/recipe', function (req, res) {
     console.log(req.body);
-
-    let sql = "INSERT INTO recipe SET?"
-    con.query(sql, req.body, function (err, result) {
-        if (err) throw err;
-        res.json("ok");
-
+    sqlRecpeiesOps.insert(req.body, function(err, response) {
+        if (err) {
+            res.status(500).send('error');
+        } else {
+            res.status(200).res('inserted');
+        }
     })
 })
+
+const sqlRecpeiesOps = {
+    insert: function(data, callback) {
+        let sql = "INSERT INTO recipe SET ?"
+        con.query(sql, data, function (err, result) {
+            if (err) {
+                callback(err);
+            }
+            callback(null, 'ok');
+    
+        })
+    }
+}
 
 app.get('/contact', function (req, res) {
 
@@ -54,7 +67,6 @@ app.get('/contact', function (req, res) {
         console.log(result);
         res.send(result);
     });
-
 });
 
 app.get('/recipe', function (req, res) {
@@ -68,13 +80,20 @@ app.get('/recipe', function (req, res) {
 });
 
 io.on('connection', function (socket) {
+    
     console.log('a user connected');
     const recipeArray=[];
-
+    socket.emit('message', recipeArray, {for:"everyone"});
     socket.on('message', function (msg) {
-        console.log('message: ' + msg);
-        recipeArray.push(msg)
-        socket.emit('message', recipeArray, {for:"everyone"});
+        sqlRecpeiesOps.insert(msg, function(insertErr, insertResponse) {
+            if (insertErr) {
+
+            } else {
+                console.log('message: ' + msg);
+                recipeArray.push(msg)
+                socket.emit('message', recipeArray, {for:"everyone"});
+            }
+        });
     });
 
     socket.on('disconnect', function () {
