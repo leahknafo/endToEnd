@@ -3,14 +3,14 @@ import { ContactService } from '../services/contact.service';
 import { Contact } from '../models/contact';
 
 @Component({
-  selector: 'app-page',
-  templateUrl: './page.component.html',
-  styleUrls: ['./page.component.css']
+  selector: 'app-contact',
+  templateUrl: './contact.component.html',
+  styleUrls: ['./contact.component.css']
 })
-export class PageComponent implements OnInit {
+export class ContactComponent implements OnInit {
 
   constructor(private contactService: ContactService) { }
-  addContact(name,email,phone){
+    addContact(name,email,phone){
 
     const d = <Contact> {
       name: name.value,
@@ -23,7 +23,11 @@ export class PageComponent implements OnInit {
     });
 
   }
+
   ngOnInit() {
   }
 
 }
+
+
+
