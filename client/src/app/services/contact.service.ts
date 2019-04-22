@@ -14,4 +14,7 @@ export class ContactService {
   post(Contact: Contact): Observable<object> {
     return this.httpClient.post('http://localhost:8888/contact', Contact);
   }
+  get(): Observable<object> {
+    return this.httpClient.get('http://localhost:8888/contact');
+  }
 }

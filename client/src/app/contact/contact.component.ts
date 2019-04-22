@@ -21,6 +21,9 @@ export class ContactComponent implements OnInit {
     this.contactService.post(d).subscribe(res => {
       console.log(res);
     });
+    // this.contactService.get().subscribe(res => {
+    //   console.log(res);
+    // });
 
   }
 

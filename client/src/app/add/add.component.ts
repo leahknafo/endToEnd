@@ -15,12 +15,12 @@ export class AddComponent implements OnInit {
 
   }
 
-  constructor(private socketService: SocketService) { 
+  constructor(private recipeService: RecipeService) { 
     this.recipeModel=<Recipe>{};
   }
   addRecipe() {
 
-    this.socketService.post(this.recipeModel).subscribe(res => {
+    this.recipeService.post(this.recipeModel).subscribe(res => {
       console.log(res);
     });
 

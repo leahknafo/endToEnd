@@ -17,7 +17,7 @@ var con = mysql.createConnection({
     host: "localhost",
     user: "root",
     password: "",
-    database: "endToEnd"
+    database: "endtoend"
 });
 
 con.connect(function (e, d) {
@@ -43,12 +43,10 @@ app.post('/recipe', function (req, res) {
     con.query(sql, req.body, function (err, result) {
         if (err) throw err;
         res.json("ok");
-
     })
 })
 
 app.get('/contact', function (req, res) {
-
     con.query("SELECT * FROM contact", function (err, result, fields) {
         if (err) throw err;
         console.log(result);
@@ -85,3 +83,4 @@ io.on('connection', function (socket) {
 http.listen(PORT, function () {
     console.log('server started at port ' + PORT)
 });
+
