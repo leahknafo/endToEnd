@@ -8,7 +8,6 @@ import { Recipe } from '../models/recipe';
   providedIn: 'root'
 })
 export class SocketService {
-
   constructor(private socket: Socket) { }
 
 get(): Observable<any[]> {
